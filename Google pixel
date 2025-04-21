@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    environment {
+        RUN_TESTS = 'true'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building project...'
+            }
+        }
+
+        stage('Test') {
+            when {
+                environment name: 'RUN_TESTS', value: 'true'
+            }
+            steps {
+                echo 'Running tests because RUN_TESTS=true'
+            }
+        }
+    }
+}
